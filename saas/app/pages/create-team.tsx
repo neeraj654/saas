@@ -33,7 +33,8 @@ class CreateTeam extends React.Component<Props, State> {
 
     this.state = {
       newName: '',
-      newAvatarUrl: 'https://storage.googleapis.com/async-await/default-user.png?v=1',
+      newAvatarUrl:
+        'https://storage.googleapis.com/async-await/default-user.png?v=1',
       disabled: false,
     };
   }
@@ -47,7 +48,10 @@ class CreateTeam extends React.Component<Props, State> {
       <Layout {...this.props}>
         <Head>
           <title>Create Team</title>
-          <meta name="description" content="Create a new Team at SaaS Boilerplate" />
+          <meta
+            name="description"
+            content="Create a new Team at SaaS Boilerplate"
+          />
         </Head>
         <div style={{ padding: '0px', fontSize: '14px', height: '100%' }}>
           <Grid container style={styleGrid}>
@@ -55,8 +59,7 @@ class CreateTeam extends React.Component<Props, State> {
               item
               sm={12}
               xs={12}
-              style={{ padding: this.props.isMobile ? '0px' : '0px 30px' }}
-            >
+              style={{ padding: this.props.isMobile ? '0px' : '0px 30px' }}>
               <h3>Create team</h3>
               <p />
               <form onSubmit={this.onSubmit}>
@@ -101,8 +104,7 @@ class CreateTeam extends React.Component<Props, State> {
                   variant="contained"
                   color="primary"
                   type="submit"
-                  disabled={this.state.disabled}
-                >
+                  disabled={this.state.disabled}>
                   Create new team
                 </Button>
               </form>
@@ -126,18 +128,22 @@ class CreateTeam extends React.Component<Props, State> {
       return;
     }
 
-    const file = (document.getElementById('upload-file') as HTMLFormElement).files[0];
+    const file = (document.getElementById('upload-file') as HTMLFormElement)
+      .files[0];
 
     try {
       this.setState({ disabled: true });
 
-      const defaultAvatarUrl = 'https://storage.googleapis.com/async-await/default-user.png?v=1';
+      const defaultAvatarUrl =
+        'https://storage.googleapis.com/async-await/default-user.png?v=1';
       const team = await store.addTeam({
         name: newName,
         avatarUrl: defaultAvatarUrl,
       });
 
-      console.log(`Returned to client: ${team._id}, ${team.name}, ${team.slug}`);
+      console.log(
+        `Returned to client: ${team._id}, ${team.name}, ${team.slug}`
+      );
 
       if (file == null) {
         Router.push(`/teams/${team.slug}/team-settings`);
@@ -150,12 +156,14 @@ class CreateTeam extends React.Component<Props, State> {
       const bucket = process.env.BUCKET_FOR_TEAM_LOGOS;
       const prefix = team.slug;
 
-      const responseFromApiServerForUpload = await getSignedRequestForUploadApiMethod({
-        fileName,
-        fileType,
-        prefix,
-        bucket,
-      });
+      const responseFromApiServerForUpload = await getSignedRequestForUploadApiMethod(
+        {
+          fileName,
+          fileType,
+          prefix,
+          bucket,
+        }
+      );
 
       const resizedFile = await resizeImage(file, 128, 128);
 
@@ -164,7 +172,7 @@ class CreateTeam extends React.Component<Props, State> {
         responseFromApiServerForUpload.signedRequest,
         {
           'Cache-Control': 'max-age=2592000',
-        },
+        }
       );
 
       const uploadedAvatarUrl = responseFromApiServerForUpload.url;
@@ -173,7 +181,8 @@ class CreateTeam extends React.Component<Props, State> {
 
       this.setState({
         newName: '',
-        newAvatarUrl: 'https://storage.googleapis.com/async-await/default-user.png?v=1',
+        newAvatarUrl:
+          'https://storage.googleapis.com/async-await/default-user.png?v=1',
       });
 
       (document.getElementById('upload-file') as HTMLFormElement).value = '';
@@ -190,7 +199,8 @@ class CreateTeam extends React.Component<Props, State> {
   };
 
   private previewTeamLogo = () => {
-    const file = (document.getElementById('upload-file') as HTMLFormElement).files[0];
+    const file = (document.getElementById('upload-file') as HTMLFormElement)
+      .files[0];
     if (!file) {
       return;
     }

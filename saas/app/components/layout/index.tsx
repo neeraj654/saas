@@ -50,8 +50,7 @@ function LayoutWrapper({
         direction="row"
         justify="flex-start"
         alignItems="stretch"
-        style={isMobile ? styleGridIsMobile : styleGrid}
-      >
+        style={isMobile ? styleGridIsMobile : styleGrid}>
         {firstGridItem ? (
           <Grid
             item
@@ -59,8 +58,7 @@ function LayoutWrapper({
             xs={12}
             style={{
               borderRight: '1px #707070 solid',
-            }}
-          >
+            }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -71,11 +69,16 @@ function LayoutWrapper({
                   marginTop: '20px',
                   display: 'inline-flex',
                   height: '40px',
-                }}
-              >
+                }}>
                 <g id="async-logo">
                   <g id="async-logo-40">
-                    <circle id="Ellipse 2" cx="20" cy="20" r="20" fill="black" />
+                    <circle
+                      id="Ellipse 2"
+                      cx="20"
+                      cy="20"
+                      r="20"
+                      fill="black"
+                    />
                     <path
                       id="path-async-logo"
                       d="M7.07825 -0.0960007V16H4.51825V13.088C4.04892 14.0907 3.33425 14.8693 2.37425 15.424C1.43558 15.9573 0.336917 16.224 -0.92175 16.224C-2.35108 16.224 -3.60975 15.8827 -4.69775 15.2C-5.76442 14.5173 -6.59642 13.5573 -7.19375 12.32C-7.76975 11.0613 -8.05775 9.6 -8.05775 7.936C-8.05775 6.272 -7.75908 4.81067 -7.16175 3.552C-6.56442 2.272 -5.73242 1.28 -4.66575 0.576C-3.57775 -0.128 -2.32975 -0.48 -0.92175 -0.48C0.336917 -0.48 1.43558 -0.202666 2.37425 0.352C3.31292 0.906667 4.02758 1.68533 4.51825 2.688V-0.0960007H7.07825ZM-0.40975 14.08C1.16892 14.08 2.38492 13.5467 3.23825 12.48C4.09158 11.392 4.51825 9.856 4.51825 7.872C4.51825 5.888 4.09158 4.36267 3.23825 3.296C2.38492 2.22933 1.16892 1.696 -0.40975 1.696C-1.98842 1.696 -3.22575 2.25067 -4.12175 3.36C-4.99642 4.448 -5.43375 5.97333 -5.43375 7.936C-5.43375 9.89867 -4.99642 11.4133 -4.12175 12.48C-3.24708 13.5467 -2.00975 14.08 -0.40975 14.08Z"
@@ -117,12 +120,15 @@ function LayoutWrapper({
                   },
                   {
                     text: 'Log out',
-                    href: `${dev ? process.env.URL_API : process.env.PRODUCTION_URL_API}/logout`,
-                    as: `${dev ? process.env.URL_API : process.env.PRODUCTION_URL_API}/logout`,
+                    href: `${
+                      dev ? process.env.URL_API : process.env.PRODUCTION_URL_API
+                    }/logout`,
+                    as: `${
+                      dev ? process.env.URL_API : process.env.PRODUCTION_URL_API
+                    }/logout`,
                     externalServer: true,
                   },
-                ]}
-              >
+                ]}>
                 <Avatar
                   src={store.currentUser.avatarUrl}
                   alt="Add username here later in the book"
@@ -135,13 +141,20 @@ function LayoutWrapper({
                   }}
                 />
 
-                <ArrowDropDownIcon color="action" style={{ verticalAlign: 'super' }} />
+                <ArrowDropDownIcon
+                  color="action"
+                  style={{ verticalAlign: 'super' }}
+                />
               </MenuWithLinks>
             </div>
             <hr />
             <p />
             <p />
-            <DiscussionList store={store} team={store.currentTeam} isMobile={isMobile} />
+            <DiscussionList
+              store={store}
+              team={store.currentTeam}
+              isMobile={isMobile}
+            />
           </Grid>
         ) : null}
 
@@ -163,7 +176,13 @@ type Props = {
 
 class Layout extends React.Component<Props> {
   public render() {
-    const { children, isMobile, firstGridItem, store, teamRequired } = this.props;
+    const {
+      children,
+      isMobile,
+      firstGridItem,
+      store,
+      teamRequired,
+    } = this.props;
 
     const { currentUser, currentTeam } = store;
 
@@ -183,8 +202,7 @@ class Layout extends React.Component<Props> {
           firstGridItem={firstGridItem}
           isMobile={isMobile}
           isThemeDark={isThemeDark}
-          store={store}
-        >
+          store={store}>
           <Grid item sm={12} xs={12}>
             {children}
           </Grid>
@@ -199,8 +217,7 @@ class Layout extends React.Component<Props> {
             firstGridItem={firstGridItem}
             isMobile={isMobile}
             isThemeDark={isThemeDark}
-            store={store}
-          >
+            store={store}>
             <Grid item sm={10} xs={12}>
               <div style={{ padding: '20px' }}>
                 Select existing team or create a new team.
@@ -221,8 +238,7 @@ class Layout extends React.Component<Props> {
             firstGridItem={firstGridItem}
             isMobile={isMobile}
             isThemeDark={isThemeDark}
-            store={store}
-          >
+            store={store}>
             <Grid item sm={10} xs={12}>
               {children}
             </Grid>
@@ -236,8 +252,7 @@ class Layout extends React.Component<Props> {
         firstGridItem={firstGridItem}
         isMobile={isMobile}
         isThemeDark={isThemeDark}
-        store={store}
-      >
+        store={store}>
         <Grid item sm={firstGridItem ? 10 : 12} xs={12}>
           <div>
             {isMobile || store.currentUrl.includes('create-team') ? null : (
@@ -252,7 +267,9 @@ class Layout extends React.Component<Props> {
                     verticalAlign: 'top',
                   }}
                   onClick={async () => {
-                    await store.currentUser.toggleTheme(!store.currentUser.darkTheme);
+                    await store.currentUser.toggleTheme(
+                      !store.currentUser.darkTheme
+                    );
                   }}
                 />
               </React.Fragment>

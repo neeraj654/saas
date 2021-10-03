@@ -1,4 +1,5 @@
 function makeQueryString(params) {
+  console.log('makeQueryString', params);
   const query = Object.keys(params)
     .filter((k) => !!params[k])
     .map((k) => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)

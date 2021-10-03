@@ -5,7 +5,7 @@ import App from 'next/app';
 import Head from 'next/head';
 import React from 'react';
 
-import { themeDark, themeLight } from '../lib/theme';
+import { themeDark, themeLight, themeMain } from '../lib/theme';
 import { getUserApiMethod } from '../lib/api/public';
 import { getInitialDataApiMethod } from '../lib/api/team-member';
 import { isMobile } from '../lib/isMobile';
@@ -136,10 +136,17 @@ class MyApp extends App {
     const isServer = typeof window === 'undefined';
 
     return (
-      <ThemeProvider theme={isThemeDark ? themeDark : themeLight}>
+      <ThemeProvider theme={themeDark}>
+        {/* <ThemeProvider theme={isThemeDark ? themeDark : themeLight}> */}
         <Head>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <link rel="stylesheet" href={isServer ? '/fonts/server.css' : '/fonts/cdn.css'} />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <link
+            rel="stylesheet"
+            href={isServer ? '/fonts/server.css' : '/fonts/cdn.css'}
+          />
           <link
             rel="stylesheet"
             href={

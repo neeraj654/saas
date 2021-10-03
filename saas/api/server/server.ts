@@ -29,8 +29,8 @@ const options = {
   useUnifiedTopology: true,
 };
 
+// mongoose.connect(dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL, options);
 mongoose.connect(dev ? process.env.MONGO_URL_TEST : process.env.MONGO_URL, options);
-
 const server = express();
 
 server.use(
